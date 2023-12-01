@@ -1,3 +1,4 @@
+import 'package:college_saathi/features/authentication/screens/signup/verify_email.dart';
 import 'package:college_saathi/utils/constants/colors.dart';
 import 'package:college_saathi/utils/constants/image_strings.dart';
 import 'package:college_saathi/utils/constants/sizes.dart';
@@ -156,7 +157,7 @@ class SignupScreen extends StatelessWidget {
                   // Sign Up Button
                   SizedBox(
                     width: double.infinity,
-                    child: ElevatedButton(onPressed: (){},child: const Text(TTexts.createAccount),),
+                    child: ElevatedButton(onPressed: () => Get.to(() => const VerifyEmailScreen()), child: const Text(TTexts.createAccount),),
                   )
                 ],
               ),

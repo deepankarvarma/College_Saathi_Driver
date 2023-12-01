@@ -1,4 +1,5 @@
 import 'package:college_saathi/features/authentication/screens/login/login.dart';
+import 'package:college_saathi/features/authentication/screens/signup/success_screen.dart';
 import 'package:college_saathi/utils/constants/image_strings.dart';
 import 'package:college_saathi/utils/constants/text_strings.dart';
 import 'package:college_saathi/utils/helpers/helper_functions.dart';
@@ -28,7 +29,7 @@ class VerifyEmailScreen extends StatelessWidget{
                               width: THelperFunctions.screenWidth()*0.6,
                             ),
                             const SizedBox(height: TSizes.spaceBtwSections,),
-
+                            // Title and sub title
                             Text(TTexts.confirmEmail, style: Theme.of(context).textTheme.headlineMedium,textAlign: TextAlign.center,),
                             const SizedBox(height: TSizes.spaceBtwItems,),
                             Text('support@email.com', style: Theme.of(context).textTheme.labelLarge,textAlign: TextAlign.center,),
@@ -36,9 +37,11 @@ class VerifyEmailScreen extends StatelessWidget{
 
                             Text(TTexts.confirmEmailSubTitle, style: Theme.of(context).textTheme.labelMedium,textAlign: TextAlign.center,),
                             const SizedBox(height: TSizes.spaceBtwSections,),
-
-                            SizedBox(width: double.infinity, child: ElevatedButton(onPressed: (){}, child: const Text(TTexts.tContinue))),
+                            // bUTTONS 
+                            SizedBox(width: double.infinity, child: ElevatedButton(onPressed: ()=>Get.to(() => const SuccessScreen()), child: const Text(TTexts.tContinue))),
                             const SizedBox(height: TSizes.spaceBtwItems,),
+
+                            SizedBox(width: double.infinity, child: TextButton(onPressed: (){}, child: const Text(TTexts.resendEmail))),
 
                         ],
                     ),

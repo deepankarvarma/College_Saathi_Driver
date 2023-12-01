@@ -1,4 +1,5 @@
 import 'package:college_saathi/common/styles/spacing_styles.dart';
+import 'package:college_saathi/features/authentication/screens/password_configuration/forget_password.dart';
 import 'package:college_saathi/features/authentication/screens/signup/signup.dart';
 import 'package:college_saathi/utils/constants/colors.dart';
 import 'package:college_saathi/utils/constants/image_strings.dart';
@@ -67,7 +68,7 @@ class LoginScreen extends StatelessWidget {
                           ],
                         ),
                         // Forgot Password
-                        TextButton(onPressed: (){}, child: const Text(TTexts.forgetPassword))
+                        TextButton(onPressed: ()=> Get.to(() => const ForgetPassword()), child: const Text(TTexts.forgetPassword))
                       ],
                     ),
                     const SizedBox(height: TSizes.spaceBtwSections),

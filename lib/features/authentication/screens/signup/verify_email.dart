@@ -4,8 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:college_saathi/utils/constants/sizes.dart';
-import 'package:college_saathi/utils/constants/text_strings.dart';
-import 'package:flutter/material.dart';
 
 class VerifyEmailScreen extends StatelessWidget{
     const VerifyEmailScreen({super.key});

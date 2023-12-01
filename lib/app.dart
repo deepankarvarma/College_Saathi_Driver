@@ -1,3 +1,4 @@
+import 'package:college_saathi/bindings/general_bindings.dart';
 import 'package:college_saathi/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:college_saathi/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class App extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: TAppTheme.lightTheme,
       darkTheme: TAppTheme.darkTheme,
+      initialBinding: GeneralBindings(),
       // debugShowCheckedModeBanner: false,
       // initialBinding: GeneralBindings(),
       home: const Scaffold(backgroundColor: TColors.primary,body:Center(child: CircularProgressIndicator(color: Colors.white,),)),

@@ -1,9 +1,11 @@
+import 'package:college_saathi/features/authentication/controllers/signup/signup_controller.dart';
 import 'package:college_saathi/features/authentication/screens/signup/verify_email.dart';
 import 'package:college_saathi/utils/constants/colors.dart';
 import 'package:college_saathi/utils/constants/image_strings.dart';
 import 'package:college_saathi/utils/constants/sizes.dart';
 import 'package:college_saathi/utils/constants/text_strings.dart';
 import 'package:college_saathi/utils/helpers/helper_functions.dart';
+import 'package:college_saathi/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -14,6 +16,7 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
+    final controller=Get.put(SignUpController());
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -32,13 +35,16 @@ class SignupScreen extends StatelessWidget {
               ),
               // Form
               Form(
-                  child: Column(
+                key: controller.signupFormKey,
+                child: Column(
                 children: [
                   // First and Last Name
                   Row(
                     children: [
                       Expanded(
                         child: TextFormField(
+                          controller: controller.firstName,
+                          validator: (value)=>TValidator.validateEmptyText('First Name', value),
                           expands: false,
                           decoration: const InputDecoration(
                             labelText: TTexts.firstName,
@@ -51,6 +57,8 @@ class SignupScreen extends StatelessWidget {
                       ),
                       Expanded(
                         child: TextFormField(
+                          controller: controller.lastName,
+                          validator: (value)=>TValidator.validateEmptyText('Last Name', value),
                           expands: false,
                           decoration: const InputDecoration(
                             labelText: TTexts.lastName,
@@ -65,6 +73,8 @@ class SignupScreen extends StatelessWidget {
                   ),
                   // Username
                   TextFormField(
+                    controller: controller.username,
+                          validator: (value)=>TValidator.validateEmptyText('User Name', value),
                     expands: false,
                     decoration: const InputDecoration(
                       labelText: TTexts.username,
@@ -77,6 +87,8 @@ class SignupScreen extends StatelessWidget {
 
                   // Email
                   TextFormField(
+                    controller: controller.email,
+                          validator: (value)=>TValidator.validateEmail(value),
                     expands: false,
                     decoration: const InputDecoration(
                       labelText: TTexts.email,
@@ -89,6 +101,8 @@ class SignupScreen extends StatelessWidget {
 
                   // Phone Number
                   TextFormField(
+                    controller: controller.phoneNumber,
+                          validator: (value)=>TValidator.validatePhoneNumber(value),
                     expands: false,
                     decoration: const InputDecoration(
                       labelText: TTexts.phoneNo,
@@ -100,6 +114,8 @@ class SignupScreen extends StatelessWidget {
                   ),
                   // Password
                   TextFormField(
+                    controller: controller.password,
+                          validator: (value)=>TValidator.validatePassword(value),
                     obscureText: true,
                     decoration: const InputDecoration(
                       prefixIcon: Icon(Iconsax.password_check),
@@ -157,7 +173,7 @@ class SignupScreen extends StatelessWidget {
                   // Sign Up Button
                   SizedBox(
                     width: double.infinity,
-                    child: ElevatedButton(onPressed: () => Get.to(() => const VerifyEmailScreen()), child: const Text(TTexts.createAccount),),
+                    child: ElevatedButton(onPressed: () => controller.signup(), child: const Text(TTexts.createAccount),),
                   )
                 ],
               ),

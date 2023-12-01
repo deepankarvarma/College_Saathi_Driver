@@ -1,4 +1,5 @@
 import 'package:college_saathi/common/styles/spacing_styles.dart';
+import 'package:college_saathi/features/authentication/screens/signup/signup.dart';
 import 'package:college_saathi/utils/constants/colors.dart';
 import 'package:college_saathi/utils/constants/image_strings.dart';
 import 'package:college_saathi/utils/constants/sizes.dart';
@@ -45,6 +46,7 @@ class LoginScreen extends StatelessWidget {
                     const SizedBox(height: TSizes.spaceBtwInputFields),
                     // Password
                     TextFormField(
+                      obscureText: true,
                       decoration: const InputDecoration(
                         prefixIcon: Icon(Iconsax.password_check),
                         labelText: TTexts.password,
@@ -73,7 +75,7 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(width: double.infinity,child: ElevatedButton(onPressed: (){}, child: const Text(TTexts.signIn))),
                     const SizedBox(height: TSizes.spaceBtwItems),
                     // Create Account Button
-                    SizedBox(width: double.infinity,child: OutlinedButton(onPressed: (){}, child: const Text(TTexts.createAccount)))
+                    SizedBox(width: double.infinity,child: OutlinedButton(onPressed: ()=>Get.to(()=>const SignupScreen()), child: const Text(TTexts.createAccount)))
                     
                   ],
                 ),

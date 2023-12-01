@@ -1,5 +1,6 @@
 import 'package:college_saathi/features/authentication/screens/login/login.dart';
 import 'package:college_saathi/utils/constants/image_strings.dart';
+import 'package:college_saathi/utils/constants/text_strings.dart';
 import 'package:college_saathi/utils/helpers/helper_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

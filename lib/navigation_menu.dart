@@ -1,4 +1,5 @@
 import 'package:college_saathi/features/itinery/screens/home/home.dart';
+import 'package:college_saathi/features/personalization/screens/profile/profile.dart';
 import 'package:college_saathi/utils/constants/colors.dart';
 import 'package:college_saathi/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -46,8 +47,6 @@ class NavigationController extends GetxController {
     Container(
       color: Colors.orange,
     ),
-    Container(
-      color: Colors.blue,
-    ),
+    const ProfileScreen(),
   ];
 }

@@ -6,7 +6,6 @@ import 'package:college_saathi/features/authentication/models/user_model.dart';
 import 'package:college_saathi/features/authentication/screens/signup/verify_email.dart';
 import 'package:college_saathi/utils/constants/image_strings.dart';
 import 'package:college_saathi/utils/popups/full_screen_loader.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

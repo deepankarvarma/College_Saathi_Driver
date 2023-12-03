@@ -36,8 +36,8 @@ class AuthenticationRepository extends GetxController {
       }
     } else {
       // Local Storage
-      deviceStorage.writeIfNull('isFirstTime', true);
-      deviceStorage.read('isFirstTime') != true
+      deviceStorage.writeIfNull('IsFirstTime', true);
+      deviceStorage.read('IsFirstTime') != true
           ? Get.offAll(() => const LoginScreen())
           : Get.offAll(const OnBoardingScreen());
     }

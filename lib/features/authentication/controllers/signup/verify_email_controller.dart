@@ -42,7 +42,7 @@ class VerifyEmailController extends GetxController {
         if (user?.emailVerified ?? false) {
           timer.cancel();
           Get.off(
-            () => Success_Screen(
+            () => screen(
               image: TImages.animalIcon,
               title: TTexts.yourAccountCreatedTitle,
               subTitle: TTexts.yourAccountCreatedSubTitle,
@@ -61,7 +61,7 @@ class VerifyEmailController extends GetxController {
   checkEmailVerificationStatus() async {
     final currentUser = FirebaseAuth.instance.currentUser;
     if (currentUser != null && currentUser.emailVerified) {
-      Get.off(() => Success_Screen(
+      Get.off(() => screen(
             image: TImages.applePay,
             title: TTexts.yourAccountCreatedTitle,
             subTitle: TTexts.yourAccountCreatedSubTitle,

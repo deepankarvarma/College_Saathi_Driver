@@ -49,6 +49,7 @@ class SignUpController extends GetxController {
           message:
               'In order to create account, you must have to read and accept the Privacy Policy & Terms of Use.',
         );
+         TFullScreenLoader.stopLoading();
         return;
       }
       // Register user in the Firebase Authentication & Save user data in the Firebase
@@ -83,9 +84,10 @@ class SignUpController extends GetxController {
       TFullScreenLoader.stopLoading();
       // Show some error
       TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
-    } finally {
-      // Remove Loader
-      TFullScreenLoader.stopLoading();
-    }
+    } 
+    // finally {
+    //   // Remove Loader
+    //   TFullScreenLoader.stopLoading();
+    // }
   }
 }

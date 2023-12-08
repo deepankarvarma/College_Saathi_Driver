@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:college_saathi/common/widgets/loaders/loaders.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
@@ -16,11 +15,11 @@ class NetworkManager extends GetxController {
   void onInit() {
     super.onInit();
     _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen(_UpdateConnectionStatus);
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
 
   /// Update the connection status based on changes in connectivity and show a relevant popup for no internet connection.
-  Future<void> _UpdateConnectionStatus(ConnectivityResult result) async {
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
     _connectionStatus.value = result;
     if (_connectionStatus.value == ConnectivityResult.none) {
       TLoaders.warningSnackBar(title: 'No Internet Connection');
@@ -28,15 +27,11 @@ class NetworkManager extends GetxController {
   }
 
   /// Check the internet connection status.
-// Returns true" if connected,'false' otherwise.
+  /// Returns true if connected, false otherwise.
   Future<bool> isConnected() async {
     try {
       final result = await _connectivity.checkConnectivity();
-      if (result == ConnectivityResult.none) {
-        return false;
-      } else {
-        return true;
-      }
+      return result != ConnectivityResult.none;
     } on PlatformException catch (_) {
       return false;
     }

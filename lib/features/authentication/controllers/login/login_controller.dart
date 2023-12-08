@@ -1,6 +1,7 @@
 import 'package:college_saathi/common/widgets/loaders/loaders.dart';
 import 'package:college_saathi/data/repositories/authentication/authentication_repository.dart';
 import 'package:college_saathi/data/services/network_manager.dart';
+import 'package:college_saathi/features/personalization/controllers/user_controller.dart';
 import 'package:college_saathi/utils/constants/image_strings.dart';
 import 'package:college_saathi/utils/popups/full_screen_loader.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class LoginController extends GetxController {
   final email = TextEditingController();
   final password = TextEditingController();
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
-
+  final userController = Get.put(UserController());
   @override
   void onInit() {
     email.text = localStorage.read('REMEMBER_ME_EMAIL');
@@ -58,6 +59,35 @@ class LoginController extends GetxController {
       TFullScreenLoader.stopLoading();
       // Show some error
       TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+    }
+  }
+
+  Future<void> googleSignIn() async {
+    try {
+      // Start Loading
+      TFullScreenLoader.openLoadingDialog(
+          'Logging you in...', TImages.appleLogo);
+// Check Internet Connectivity
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        TFullScreenLoader.stopLoading();
+        return;
+      }
+
+      // Google Authentication
+      final userCredentials =
+          await AuthenticationRepository.instance.signInWithGoogle();
+
+      // Save user record
+      await userController.saveUserRecord(userCredentials);
+
+      // Remove loader
+      TFullScreenLoader.stopLoading();
+
+      // Redirect
+      AuthenticationRepository.instance.screenRedirect();
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
     }
   }
 }

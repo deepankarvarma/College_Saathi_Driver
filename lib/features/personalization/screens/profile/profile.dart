@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:college_saathi/features/authentication/screens/login/login.dart';
+import 'package:college_saathi/features/personalization/controllers/user_controller.dart';
 import 'package:college_saathi/features/personalization/screens/profile/widgets/profile_menu.dart';
 import 'package:college_saathi/utils/constants/image_strings.dart';
 import 'package:college_saathi/utils/constants/sizes.dart';
@@ -11,9 +14,10 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    final controller = Get.put(UserController());
     return Scaffold(
       appBar: AppBar(),
-
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(TSizes.defaultSpace),
@@ -24,44 +28,79 @@ class ProfileScreen extends StatelessWidget {
                 width: double.infinity,
                 child: Column(
                   children: [
-                    // TCircularImage(image:TImages.user,width:80,height:80),
-                    TextButton(onPressed: (){}, child: const Text('Change Profile Picture'))
+                    //const TCircularImage(image:TImages.user,width:80,height:80),
+                    TextButton(
+                        onPressed: () {},
+                        child: const Text('Change Profile Picture'))
                   ],
                 ),
               ),
 
               // Details
-              const SizedBox(height: TSizes.spaceBtwItems/2,),
+              const SizedBox(
+                height: TSizes.spaceBtwItems / 2,
+              ),
               const Divider(),
-              const SizedBox(height: TSizes.spaceBtwItems,),
+              const SizedBox(
+                height: TSizes.spaceBtwItems,
+              ),
+
               // Heading Profile Info
               // const TSectionHeading(title:'Profile Information', showActionButton:false),
-              const SizedBox(height: TSizes.spaceBtwItems,),
-              TProfileMenu(title:'Name',value: 'Deepankar Varma',onPressed:(){}),
-              TProfileMenu(title:'User Type',value: 'Rider',onPressed:(){}),
-              const SizedBox(height: TSizes.spaceBtwItems,),
+              const SizedBox(
+                height: TSizes.spaceBtwItems,
+              ),
+              Obx(
+                ()=> TProfileMenu(
+                    title: 'Name', value: controller.user.value.fullName, onPressed: () {}),
+              ),
+              Obx(
+                ()=>TProfileMenu(
+                  title: 'User Name', value: controller.user.value.username, onPressed: () {}),
+              ),
+              const SizedBox(
+                height: TSizes.spaceBtwItems,
+              ),
               const Divider(),
-              const SizedBox(height: TSizes.spaceBtwItems,),
+              const SizedBox(
+                height: TSizes.spaceBtwItems,
+              ),
 
               // Heading Personal Info
               // const TSectionHeading(title:'Personal Information', showActionButton:false),
-              const SizedBox(height: TSizes.spaceBtwItems,),
-              TProfileMenu(title:'User Id',value: 'deepankar_varma',onPressed:(){}),
-              TProfileMenu(title:'Email',value: 'satwikdpshrit@gmail.com',onPressed:(){}),
-              TProfileMenu(title:'Phone Number',value: '9876543210',onPressed:(){}),
-              TProfileMenu(title:'Gender',value: 'Male',onPressed:(){}),
+              const SizedBox(
+                height: TSizes.spaceBtwItems,
+              ),
+              Obx(
+                ()=>TProfileMenu(
+                  title: 'User Id', value: controller.user.value.id,icon: Iconsax.copy, onPressed: () {}),
+              ),
+              Obx(
+                ()=>TProfileMenu(
+                  title: 'Email',
+                  value: controller.user.value.email,
+                  onPressed: () {}),
+              ),
+              Obx(
+                ()=>TProfileMenu(
+                  title: 'Phone Number', value: controller.user.value.phoneNumber, onPressed: () {}),
+              ),
+              TProfileMenu(title: 'Gender', value: 'Male', onPressed: () {}),
               const Divider(),
-              const SizedBox(height: TSizes.spaceBtwItems,),
+              const SizedBox( 
+                height: TSizes.spaceBtwItems,
+              ),
               Center(
-                child:TextButton(onPressed: () => Get.offAll(() => const LoginScreen()), 
-                child: const Text('Close Account',style: TextStyle(color: Colors.red)),
+                child: TextButton(
+                  onPressed: () => Get.offAll(() => const LoginScreen()),
+                  child: const Text('Close Account',
+                      style: TextStyle(color: Colors.red)),
                 ),
               ),
             ],
           ),
-          ),
+        ),
       ),
     );
   }
 }
-

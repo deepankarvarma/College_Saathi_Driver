@@ -87,6 +87,7 @@ class LoginController extends GetxController {
       // Redirect
       AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
+      TFullScreenLoader.stopLoading();
       TLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
     }
   }

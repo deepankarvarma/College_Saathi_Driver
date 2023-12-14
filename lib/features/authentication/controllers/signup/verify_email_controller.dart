@@ -16,6 +16,7 @@ class VerifyEmailController extends GetxController {
   @override
   void onInit() {
     sendEmailVerifcation();
+    setTimerForAutoRedirect();
     super.onInit();
   }
 
@@ -42,13 +43,7 @@ class VerifyEmailController extends GetxController {
         if (user?.emailVerified ?? false) {
           timer.cancel();
           Get.off(
-            () => screen(
-              image: TImages.animalIcon,
-              title: TTexts.yourAccountCreatedTitle,
-              subTitle: TTexts.yourAccountCreatedSubTitle,
-              onPressed: () =>
-                  AuthenticationRepository.instance.screenRedirect(),
-            ),
+            () => const SuccessScreen(),
 // SuccessScreen
           );
         }

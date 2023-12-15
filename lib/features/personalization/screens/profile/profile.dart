@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:college_saathi/features/authentication/screens/login/login.dart';
 import 'package:college_saathi/features/personalization/controllers/user_controller.dart';
+import 'package:college_saathi/features/personalization/screens/profile/change_name.dart';
 import 'package:college_saathi/features/personalization/screens/profile/widgets/profile_menu.dart';
 import 'package:college_saathi/utils/constants/image_strings.dart';
 import 'package:college_saathi/utils/constants/sizes.dart';
@@ -52,7 +53,7 @@ class ProfileScreen extends StatelessWidget {
               ),
               Obx(
                 ()=> TProfileMenu(
-                    title: 'Name', value: controller.user.value.fullName, onPressed: () {}),
+                    title: 'Name', value: controller.user.value.fullName, onPressed: () => Get.to(()=>const changeName())),
               ),
               Obx(
                 ()=>TProfileMenu(
@@ -92,7 +93,7 @@ class ProfileScreen extends StatelessWidget {
               ),
               Center(
                 child: TextButton(
-                  onPressed: () => Get.offAll(() => const LoginScreen()),
+                  onPressed: () => controller.deleteAccountWarningPopup(),
                   child: const Text('Close Account',
                       style: TextStyle(color: Colors.red)),
                 ),

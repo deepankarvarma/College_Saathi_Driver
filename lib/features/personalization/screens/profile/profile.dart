@@ -3,7 +3,10 @@ import 'dart:ffi';
 import 'package:college_saathi/features/authentication/screens/login/login.dart';
 import 'package:college_saathi/features/personalization/controllers/user_controller.dart';
 import 'package:college_saathi/features/personalization/screens/profile/change_name.dart';
+import 'package:college_saathi/features/personalization/screens/profile/section_heading.dart';
+import 'package:college_saathi/features/personalization/screens/profile/t_circular_image.dart';
 import 'package:college_saathi/features/personalization/screens/profile/widgets/profile_menu.dart';
+import 'package:college_saathi/tapp_bar.dart';
 import 'package:college_saathi/utils/constants/image_strings.dart';
 import 'package:college_saathi/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
     
     final controller = Get.put(UserController());
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const TAppBar(showBackArrow: true,title: Text('My Profile')),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(TSizes.defaultSpace),
@@ -29,7 +32,7 @@ class ProfileScreen extends StatelessWidget {
                 width: double.infinity,
                 child: Column(
                   children: [
-                    //const TCircularImage(image:TImages.user,width:80,height:80),
+                    const TCircularImage(image:TImages.user,width:80,height:80),
                     TextButton(
                         onPressed: () {},
                         child: const Text('Change Profile Picture'))
@@ -47,7 +50,7 @@ class ProfileScreen extends StatelessWidget {
               ),
 
               // Heading Profile Info
-              // const TSectionHeading(title:'Profile Information', showActionButton:false),
+              const TSectionHeading(title:'Profile Information', showActionButton:false),
               const SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
@@ -68,7 +71,7 @@ class ProfileScreen extends StatelessWidget {
               ),
 
               // Heading Personal Info
-              // const TSectionHeading(title:'Personal Information', showActionButton:false),
+              const TSectionHeading(title:'Personal Information', showActionButton:false),
               const SizedBox(
                 height: TSizes.spaceBtwItems,
               ),

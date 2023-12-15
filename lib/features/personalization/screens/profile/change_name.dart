@@ -1,4 +1,5 @@
 import 'package:college_saathi/features/personalization/controllers/update_name_controller.dart';
+import 'package:college_saathi/tapp_bar.dart';
 import 'package:college_saathi/utils/constants/sizes.dart';
 import 'package:college_saathi/utils/constants/text_strings.dart';
 import 'package:college_saathi/utils/validators/validation.dart';
@@ -14,11 +15,12 @@ class changeName extends StatelessWidget {
     final controller = Get.put(updateNameController());
     return Scaffold(
       // Custom Appbar
-//       appBar: TAppBar(
-// showBackArrow: true,
-// title: Text( 'Change Name', style: Theme.of(context). textTheme.headlineSmall),
-// ),
-      appBar: AppBar(title: const Text('Change Name')),
+      appBar: TAppBar(
+        showBackArrow: true,
+        title: Text('Change Name',
+            style: Theme.of(context).textTheme.headlineSmall),
+      ),
+      // appBar: AppBar(title: const Text('Change Name')),
       body: Padding(
         padding: EdgeInsets.all(TSizes.defaultSpace),
         child: Column(
@@ -60,10 +62,12 @@ class changeName extends StatelessWidget {
               ),
             ),
             const SizedBox(height: TSizes.spaceBtwSections),
-            // Save button 
+            // Save button
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton(onPressed: ()=>controller.updateUserName(),child:const Text('Save')),
+              child: ElevatedButton(
+                  onPressed: () => controller.updateUserName(),
+                  child: const Text('Save')),
             )
           ],
         ),

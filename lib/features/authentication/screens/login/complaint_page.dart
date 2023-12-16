@@ -11,7 +11,7 @@ import 'package:iconsax/iconsax.dart';
 
 class ComplaintPage extends StatelessWidget {
   const ComplaintPage({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ComplaintController());

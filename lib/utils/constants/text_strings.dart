@@ -4,6 +4,9 @@ class TTexts {
 
   // -- GLOBAL Texts
   static const String and = "and";
+  static const String source = "Source";
+  static const String destination = "Destination";
+  static const String bookinit = "Book Rickshaw";
   static const String skip = "Skip";
   static const String done = "Done";
   static const String submit = "Submit";

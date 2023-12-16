@@ -82,7 +82,7 @@ class _RideHistoryItemState extends State<RideHistoryItem> {
                       allowHalfRating: false,
                       itemCount: 5,
                       itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                      itemBuilder: (context, _) => Icon(
+                      itemBuilder: (context, _) => const Icon(
                         Icons.star,
                         color: Colors.amber,
                       ),
@@ -100,16 +100,11 @@ class _RideHistoryItemState extends State<RideHistoryItem> {
               // Handle tap event for each ride item
             },
           ),
-          const Positioned(
-            top: 10,
-            right: 25,
-            child: Icon(Icons.check, color: Colors.green),
-          ),
           Positioned(
-            bottom: 8,
+            bottom: 32,
             right: 8,
             child: ElevatedButton(
-              onPressed: () =>Get.to(()=>const ComplaintPage()),
+              onPressed: () => Get.to(() => const ComplaintPage()),
               style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.all(6),
                 shape: CircleBorder(),
@@ -117,7 +112,7 @@ class _RideHistoryItemState extends State<RideHistoryItem> {
               child: Container(
                 width: 24,
                 height: 24,
-                child: Icon(Icons.warning, size: 16),
+                child: Icon(Icons.arrow_outward, size: 20),
               ),
             ),
           ),
@@ -126,4 +121,3 @@ class _RideHistoryItemState extends State<RideHistoryItem> {
     );
   }
 }
-

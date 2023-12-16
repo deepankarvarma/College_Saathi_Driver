@@ -54,6 +54,7 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
+              
               Obx(
                 ()=> TProfileMenu(
                     title: 'Name', value: controller.user.value.fullName, onPressed: () => Get.to(()=>const changeName())),

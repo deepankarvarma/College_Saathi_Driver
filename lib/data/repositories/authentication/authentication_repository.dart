@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:college_saathi/common/widgets/loaders/loaders.dart';
 import 'package:college_saathi/data/repositories/user/user_repository.dart';
 import 'package:college_saathi/features/authentication/screens/login/login.dart';
 import 'package:college_saathi/features/authentication/screens/onboarding/onboarding.dart';
@@ -49,23 +51,52 @@ class AuthenticationRepository extends GetxController {
   }
 
   /// [EmailAuthentication] - SignIn
-  Future<UserCredential?> loginWithEmailAndPassword(
-      String email, String password) async {
+  Future<Map<String, dynamic>?> loginWithEmailAndPassword(
+    String email, String password) async {
+  try {
+    UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+
+    // Check if the user is a driver
     try {
-      return await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
-    } on FirebaseAuthException catch (e) {
-      throw TFirebaseAuthException(e.code).message;
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on FormatException catch (_) {
-      throw const TFormatException();
-    } on TPlatformException catch (e) {
-      throw TPlatformException(e.code).message;
+      DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(userCredential.user!.uid)
+          .get();
+
+      if (!userSnapshot.exists) {
+        // User is not a driver, show an error
+        TLoaders.errorSnackBar(
+          title: 'Invalid User',
+          message: 'Only users can log in to the driver app.',
+        );
+        await _auth.signOut(); // Sign out the user
+        return null;
+      }
     } catch (e) {
-      throw 'Something went wrong';
+      // Handle any errors in the database query
+      throw 'Database error while checking user type';
     }
+
+    return {
+      'userCredential': userCredential,
+      'isDriver': true,
+    };
+  } on FirebaseAuthException catch (e) {
+    throw TFirebaseAuthException(e.code).message;
+  } on FirebaseException catch (e) {
+    throw TFirebaseException(e.code).message;
+  } on FormatException catch (_) {
+    throw const TFormatException();
+  } on TPlatformException catch (e) {
+    throw TPlatformException(e.code).message;
+  } catch (e) {
+    throw 'Something went wrong';
   }
+}
+
 
   // Re authenticate user
   Future<void> reAuthenticateWithEmailAndPassword(
@@ -107,7 +138,7 @@ class AuthenticationRepository extends GetxController {
       throw 'Something went wrong';
     }
   }
-
+  
   /// [EmailVerification] - MAIL VERIFICATION
   Future<void> sendEmailVerification() async {
     try {

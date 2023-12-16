@@ -9,6 +9,7 @@ class TTexts {
   static const String submit = "Submit";
   static const String appName = "T-Store";
   static const String tContinue = "Continue";
+  static const String complainthead = "Raise A Complaint";
 
 
   // -- OnBoarding Texts
@@ -24,6 +25,7 @@ class TTexts {
   // -- Authentication Forms
   static const String firstName = "First Name";
   static const String lastName = "Last Name";
+  static const String complaint = "Complaint Text";
   static const String email = "E-Mail";
   static const String password = "Password";
   static const String newPassword = "New Password";
@@ -49,6 +51,7 @@ class TTexts {
   static const String signupTitle = "Let’s create your account";
   static const String forgetPasswordTitle = "Forget password";
   static const String forgetPasswordSubTitle = "Don’t worry sometimes people can forget too, enter your email and we will send you a password reset link.";
+  static const String complaintSubTitle = "Don’t worry sometimes people can have bad experience too, enter your feedback and we will look into it.";
   static const String changeYourPasswordTitle = "Password Reset Email Sent";
   static const String changeYourPasswordSubTitle = "Your Account Security is Our Priority! We've Sent You a Secure Link to Safely Change Your Password and Keep Your Account Protected.";
   static const String confirmEmail = "Verify your email address!";

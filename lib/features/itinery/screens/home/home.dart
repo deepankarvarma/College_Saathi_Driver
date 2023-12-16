@@ -209,7 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
       margin: EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Colors.grey, // Fixed color for all dots
+        color: index == _currentCarouselIndex ? Colors.white : Colors.grey,
       ),
     );
   }

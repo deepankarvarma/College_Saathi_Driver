@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:college_saathi/common/styles/spacing_styles.dart';
 import 'package:college_saathi/features/authentication/controllers/login/login_controller.dart';
+import 'package:college_saathi/features/authentication/screens/login/complaint_page.dart';
 import 'package:college_saathi/features/authentication/screens/password_configuration/forget_password.dart';
 import 'package:college_saathi/features/authentication/screens/signup/signup.dart';
 import 'package:college_saathi/navigation_menu.dart';
@@ -23,7 +24,6 @@ class ridehistory extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TAppBar(
-        showBackArrow: true,
         title: Text('Ride History'),
       ),
       body: SingleChildScrollView(
@@ -100,7 +100,7 @@ class _RideHistoryItemState extends State<RideHistoryItem> {
               // Handle tap event for each ride item
             },
           ),
-          Positioned(
+          const Positioned(
             top: 10,
             right: 25,
             child: Icon(Icons.check, color: Colors.green),
@@ -109,12 +109,7 @@ class _RideHistoryItemState extends State<RideHistoryItem> {
             bottom: 8,
             right: 8,
             child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ComplaintPage()),
-                );
-              },
+              onPressed: () =>Get.to(()=>const ComplaintPage()),
               style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.all(6),
                 shape: CircleBorder(),
@@ -132,16 +127,3 @@ class _RideHistoryItemState extends State<RideHistoryItem> {
   }
 }
 
-class ComplaintPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('File a Complaint'),
-      ),
-      body: Center(
-        child: Text('Complaint form goes here.'),
-      ),
-    );
-  }
-}

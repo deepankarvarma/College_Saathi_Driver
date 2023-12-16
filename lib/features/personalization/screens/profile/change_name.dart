@@ -22,7 +22,7 @@ class changeName extends StatelessWidget {
       ),
       // appBar: AppBar(title: const Text('Change Name')),
       body: Padding(
-        padding: EdgeInsets.all(TSizes.defaultSpace),
+        padding: const EdgeInsets.all(TSizes.defaultSpace),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

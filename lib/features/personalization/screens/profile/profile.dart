@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:college_saathi/features/authentication/screens/login/login.dart';
 import 'package:college_saathi/features/personalization/controllers/user_controller.dart';
 import 'package:college_saathi/features/personalization/screens/profile/change_name.dart';

@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _currentCarouselIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     final ThemeData lightTheme = ThemeData.light();
-
 
     return Theme(
       data: lightTheme,
@@ -37,7 +43,9 @@ class HomeScreen extends StatelessWidget {
                   autoPlay: true,
                   aspectRatio: 2.0,
                   onPageChanged: (index, reason) {
-                    // Handle carousel item change
+                    setState(() {
+                      _currentCarouselIndex = index;
+                    });
                   },
                 ),
                 items: [
@@ -66,13 +74,10 @@ class HomeScreen extends StatelessWidget {
               SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildDot(0),
-                  _buildDot(1),
-                  _buildDot(2),
-                  _buildDot(3),
-                  _buildDot(4),
-                ],
+                children: List.generate(
+                  5,
+                  (index) => _buildDot(index),
+                ),
               ),
               SizedBox(height: 16),
               // 1*3 Grid
@@ -204,7 +209,7 @@ class HomeScreen extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Colors.grey, // Fixed color for all dots
+        color: index == _currentCarouselIndex ? Colors.white : Colors.grey,
       ),
     );
   }

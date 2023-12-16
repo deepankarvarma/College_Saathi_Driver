@@ -5,6 +5,7 @@ import 'package:college_saathi/features/authentication/controllers/login/login_c
 import 'package:college_saathi/features/authentication/screens/password_configuration/forget_password.dart';
 import 'package:college_saathi/features/authentication/screens/signup/signup.dart';
 import 'package:college_saathi/navigation_menu.dart';
+import 'package:college_saathi/tapp_bar.dart';
 import 'package:college_saathi/utils/constants/colors.dart';
 import 'package:college_saathi/utils/constants/image_strings.dart';
 import 'package:college_saathi/utils/constants/sizes.dart';
@@ -21,7 +22,8 @@ class ridehistory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: TAppBar(
+        showBackArrow: true,
         title: Text('Ride History'),
       ),
       body: SingleChildScrollView(

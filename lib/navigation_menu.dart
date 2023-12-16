@@ -1,3 +1,4 @@
+import 'package:college_saathi/features/authentication/screens/login/ridehistory.dart';
 import 'package:college_saathi/features/itinery/screens/home/home.dart';
 import 'package:college_saathi/features/personalization/screens/profile/profile.dart';
 import 'package:college_saathi/utils/constants/colors.dart';
@@ -40,11 +41,9 @@ class NavigationMenu extends StatelessWidget {
 class NavigationController extends GetxController {
   final Rx<int> selectedIndex = 0.obs;
   final screens = [
-    const HomeScreen(),
     
-    Container(
-      color: Colors.purple,
-    ),
+    const HomeScreen(),
+    const ridehistory(),
     Container(
       color: Colors.orange,
     ),

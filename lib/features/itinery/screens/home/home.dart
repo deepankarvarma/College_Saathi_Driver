@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: 16),
               CarouselSlider(
                 options: CarouselOptions(
-                  height: 200.0,
+                  height: 165.0,
                   enlargeCenterPage: true,
                   autoPlay: true,
                   aspectRatio: 2.0,
@@ -50,23 +50,28 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 items: [
                   _buildCarouselItem(
-                    'https://www.collegebatch.com/static/clg-gallery/thapar-institute-of-engineering-technology-patiala-214568.jpg',
+                    'https://example.com/template_image1.jpg',
                     lightTheme,
                   ),
+                  // Repeat the above Container for other template images
+                  // Template Image 2
                   _buildCarouselItem(
-                    'https://lmtsm.thapar.edu/assets/front/img/glogiftbanner.jpg',
+                    'https://example.com/template_image2.jpg',
                     lightTheme,
                   ),
+                  // Template Image 3
                   _buildCarouselItem(
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnS-bNnBZKHaHnP8b9n9SFZqURVVWB2fe2KA&usqp=CAU',
+                    'https://example.com/template_image3.jpg',
                     lightTheme,
                   ),
+                  // Template Image 4
                   _buildCarouselItem(
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTifVGJefJXoUqcR0P4quZ3Zh1uxJQHweauKA&usqp=CAU',
+                    'https://example.com/template_image4.jpg',
                     lightTheme,
                   ),
+                  // Template Image 5
                   _buildCarouselItem(
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnPM5r9G6EgoTiAItUzU6sJeYlmIjX2XdOGA&usqp=CAU',
+                    'https://example.com/template_image5.jpg',
                     lightTheme,
                   ),
                 ],
@@ -86,12 +91,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 children: [
-                  _buildGridItem('Important Contacts', lightTheme),
-                  _buildGridItem('College Events', lightTheme),
-                  _buildGridItem('Book Ride', lightTheme),
-                  _buildGridItem('Vendor Details', lightTheme),
-                  _buildGridItem('My Account', lightTheme),
-                  _buildGridItem('Finder', lightTheme),
+                  _buildGridItem(context, 'Important Contacts', lightTheme),
+                  _buildGridItem(context, 'College Events', lightTheme),
+                  _buildGridItem(context, 'Book Ride', lightTheme),
+                  _buildGridItem(context, 'Vendor Details', lightTheme),
+                  _buildGridItem(context, 'My Account', lightTheme),
+                  _buildGridItem(context, 'Finder', lightTheme),
                 ],
                 mainAxisSpacing: 16.0,
                 crossAxisSpacing: 16.0,
@@ -153,11 +158,12 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildGridItem(String title, ThemeData theme) {
+  Widget _buildGridItem(BuildContext context, String title, ThemeData theme) {
     return InkWell(
       onTap: () {
         // Handle grid item press
         // You can navigate to the respective page based on the title
+        _navigateToPage(context, title);
       },
       child: Card(
         color: theme.cardColor,
@@ -168,6 +174,16 @@ class _HomeScreenState extends State<HomeScreen> {
             textAlign: TextAlign.center,
           ),
         ),
+      ),
+    );
+  }
+
+  void _navigateToPage(BuildContext context, String pageTitle) {
+    // Navigate to a new page based on the title
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DetailPage(title: pageTitle),
       ),
     );
   }
@@ -200,16 +216,21 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+}
 
-  Widget _buildDot(int index) {
-    // Customize your dot appearance here
-    return Container(
-      width: 8,
-      height: 8,
-      margin: EdgeInsets.symmetric(horizontal: 4),
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: index == _currentCarouselIndex ? Colors.white : Colors.grey,
+class DetailPage extends StatelessWidget {
+  final String title;
+
+  const DetailPage({Key? key, required this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: Center(
+        child: Text('Details for $title'),
       ),
     );
   }

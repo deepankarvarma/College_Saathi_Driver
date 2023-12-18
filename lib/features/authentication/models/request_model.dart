@@ -11,7 +11,7 @@ class RequestModel {
   final String lastName;
   final String email;
   final String phoneNumber;
-  final String driverId;
+   String driverId;
   final String driverPhone;
   final String driverName;
 

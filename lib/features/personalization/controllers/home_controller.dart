@@ -2,7 +2,6 @@ import 'package:college_saathi/common/widgets/loaders/loaders.dart';
 import 'package:college_saathi/data/repositories/authentication/authentication_repository.dart';
 import 'package:college_saathi/data/repositories/request/request_repository.dart';
 import 'package:college_saathi/data/repositories/user/user_repository.dart';
-import '../../../data/services/network_manager.dart';
 import 'package:college_saathi/data/services/network_manager.dart';
 import 'package:college_saathi/features/authentication/models/request_model.dart';
 import 'package:college_saathi/features/authentication/models/user_model.dart';
@@ -72,9 +71,11 @@ class HomeController extends GetxController {
         final List<RequestModel> requests = await userRepository.fetchRequests();
 
         // Update newUser with the latest data
-        final updatedRequest = requests.firstWhere((request) => request.id == newUser.id);
+      final updatedRequest = requests.firstWhere((request) => request.id == newUser.id);
         if (updatedRequest != null) {
           newUser.driverId = updatedRequest.driverId;
+          newUser.driverName = updatedRequest.driverName;
+          newUser.driverPhone = updatedRequest.driverPhone;
           // You might need to update other fields as well based on your data structure
         }
       } catch (e) {

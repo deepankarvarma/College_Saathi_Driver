@@ -12,8 +12,8 @@ class RequestModel {
   final String email;
   final String phoneNumber;
    String driverId;
-  final String driverPhone;
-  final String driverName;
+   String driverPhone;
+   String driverName;
 
   /// Constructor for UserModel.
   RequestModel({

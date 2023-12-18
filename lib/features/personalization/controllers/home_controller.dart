@@ -4,7 +4,9 @@ import 'package:college_saathi/data/repositories/request/request_repository.dart
 import 'package:college_saathi/data/repositories/user/user_repository.dart';
 import 'package:college_saathi/data/services/network_manager.dart';
 import 'package:college_saathi/features/authentication/models/request_model.dart';
+import 'package:college_saathi/features/authentication/models/user_model.dart';
 import 'package:college_saathi/features/personalization/controllers/user_controller.dart';
+import 'package:college_saathi/features/personalization/screens/profile/user_details.dart';
 import 'package:college_saathi/utils/constants/image_strings.dart';
 import 'package:college_saathi/utils/popups/full_screen_loader.dart';
 import 'package:flutter/material.dart';
@@ -42,14 +44,22 @@ class HomeController extends GetxController {
       // final userCredential = await AuthenticationRepository.instance
       //     .registerWithEmailAndPassword(
       //         email.text.trim(), password.text.trim());
+    
+      final UserModel user = controller.user.value;
 
-      // Save Authenticated user data in the Firebase Firestore
+      // Create RequestModel with user details
       final newUser = RequestModel(
-        id: controller.user.value.id,
+        id: user.id,
         source: from.text.trim(),
         destination: to.text.trim(),
         isAccepted: false,
-        
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+        driverId: '',
+        driverName: '',
+        driverPhone: '',
       );
 
       final userRepository = Get.put(RequestRepository());
@@ -62,7 +72,8 @@ class HomeController extends GetxController {
           message: 'Your request has been sent');
 
       // Move to Verify Email Screen
-      //Get.to(() => VerifyEmailScreen(email: email.text.trim()));
+      Get.to(() => UserDetails(request: newUser));
+      
     }catch (e) {
       // Remove Loader
       TFullScreenLoader.stopLoading();
@@ -71,3 +82,4 @@ class HomeController extends GetxController {
     }
   }
 }
+

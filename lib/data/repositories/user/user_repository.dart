@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:college_saathi/data/repositories/authentication/authentication_repository.dart';
+import 'package:college_saathi/features/authentication/models/request_model.dart';
 import 'package:college_saathi/features/authentication/models/user_model.dart';
 import 'package:college_saathi/utils/exceptions/firebase_exceptions.dart';
 import 'package:college_saathi/utils/exceptions/format_exceptions.dart';
@@ -25,7 +26,26 @@ class UserRepository extends GetxController {
       throw 'Something went wrong. Please try again';
     }
   }
+  // Function to fetch user details on the basis of User ID
+  Future<List<RequestModel>> fetchRequests() async {
+  try {
+    final querySnapshot = await _db.collection("Requests").get();
+    
+    final requests = querySnapshot.docs
+        .map((doc) => RequestModel.fromSnapshot(doc))
+        .toList();
 
+    return requests;
+  } on FirebaseException catch (e) {
+    throw TFirebaseException(e.code).message;
+  } on FormatException catch (_) {
+    throw const TFormatException();
+  } on PlatformException catch (e) {
+    throw TPlatformException(e.code).message;
+  } catch (e) {
+    throw 'Something went wrong. Please try again';
+  }
+}
   // Function to fetch user details on the basis of User ID
   Future<UserModel> fetchUserDetails() async {
     try {

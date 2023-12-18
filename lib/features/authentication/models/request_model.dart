@@ -1,17 +1,19 @@
-import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:college_saathi/utils/formatters/formatter.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class RequestModel {
-// Keep those values final which you do not want to update
+  // Keep those values final which you do not want to update
   final String id;
   final String source;
   final String destination;
   final bool isAccepted;
+  final String firstName;
+  final String lastName;
+  final String email;
+  final String phoneNumber;
+  final String driverId;
+  final String driverPhone;
+  final String driverName;
 
   /// Constructor for UserModel.
   RequestModel({
@@ -19,30 +21,46 @@ class RequestModel {
     required this.source,
     required this.destination,
     required this.isAccepted,
-
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.phoneNumber,
+    required this.driverId,
+    required this.driverPhone,
+    required this.driverName,
   });
-
-
-  /// Static function to create an empty user model.
   static RequestModel empty() => RequestModel(
-      id: '',
-      source: '',
-      destination: '',
-      isAccepted: true,
-  );
+        id: '',
+        source: '',
+        destination: '',
+        isAccepted: true,
+        firstName: '',
+        lastName: '',
+        email: '',
+        phoneNumber: '',
+        driverId: '',
+        driverPhone: '',
+        driverName: '',
+      );
 
-  /// Convert model to JSON structure for storing data in Firebase.
+  // Convert RequestModel to JSON
   Map<String, dynamic> toJson() {
     return {
       'User Id': id,
       'Source': source,
       'Destination': destination,
       'Is Accepted': isAccepted,
-      
+      'First Name': firstName,
+      'Last Name': lastName,
+      'Email': email,
+      'Phone Number': phoneNumber,
+      'Driver Id': '',
+      'Driver Name': '',
+      'Driver Phone No':''
     };
   }
 
-  // Factory method to create a UserModel from a Firebase document snapshot
+  // Factory method to create a RequestModel from a Firebase document snapshot
   factory RequestModel.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() != null) {
@@ -51,11 +69,18 @@ class RequestModel {
         id: document.id,
         source: data['Source'] ?? '',
         destination: data['Destination'] ?? '',
-        isAccepted: data['Is Accepted'] ?? '',
-        
+        isAccepted: data['Is Accepted'] ?? false,
+        firstName: data['First Name'] ?? '',
+        lastName: data['Last Name'] ?? '',
+        email: data['Email'] ?? '',
+        phoneNumber: data['Phone Number'] ?? '',
+        driverId: data['Driver Id'] ?? '',
+        driverName: data['Driver Name'] ?? '',
+        driverPhone: data['Driver Phone No'] ?? '',
       );
     } else {
       return RequestModel.empty();
     }
   }
 }
+

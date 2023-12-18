@@ -1,4 +1,5 @@
 import 'package:college_saathi/features/authentication/screens/login/ridehistory.dart';
+import 'package:college_saathi/features/authentication/screens/signup/events.dart';
 import 'package:college_saathi/features/itinery/screens/home/home.dart';
 import 'package:college_saathi/features/personalization/screens/profile/profile.dart';
 import 'package:college_saathi/utils/constants/colors.dart';
@@ -28,7 +29,7 @@ class NavigationMenu extends StatelessWidget {
           destinations: const [
             NavigationDestination(icon: Icon(Iconsax.home), label: 'Home'),
             NavigationDestination(icon: Icon(Iconsax.shop), label: 'Ride History'),
-            NavigationDestination(icon: Icon(Iconsax.heart), label: 'Wishlist'),
+            NavigationDestination(icon: Icon(Iconsax.heart), label: 'College Events'),
             NavigationDestination(icon: Icon(Iconsax.user), label: 'Profile'),
           ],
         ),
@@ -44,9 +45,7 @@ class NavigationController extends GetxController {
     
     const HomePage(),
     const ridehistory(),
-    Container(
-      color: Colors.orange,
-    ),
+    EventsPage(),
     const ProfileScreen(),
   ];
 }

@@ -3,6 +3,7 @@ import 'package:college_saathi/data/repositories/user/user_repository.dart';
 import 'package:college_saathi/data/services/network_manager.dart';
 import 'package:college_saathi/features/personalization/controllers/user_controller.dart';
 import 'package:college_saathi/features/personalization/screens/profile/profile.dart';
+import 'package:college_saathi/navigation_menu.dart';
 import 'package:college_saathi/utils/constants/image_strings.dart';
 import 'package:college_saathi/utils/popups/full_screen_loader.dart';
 import 'package:flutter/material.dart';
@@ -62,8 +63,8 @@ class updateNameController extends GetxController {
           title: 'Congratulations', message: 'Your name has been updated. ');
 
 // Move to previous screen.
-      Get.off(() => const ProfileScreen());
-    } catch (e) {
+      Get.offAll(() => const NavigationMenu());    
+      } catch (e) {
       TFullScreenLoader.stopLoading();
       TLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
     }

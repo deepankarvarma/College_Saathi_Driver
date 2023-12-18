@@ -35,7 +35,7 @@ class ProfileScreen extends StatelessWidget {
                     const TCircularImage(image:TImages.user,width:80,height:80),
                     TextButton(
                         onPressed: ()=>Get.off(()=> const LoginScreen()),
-                        child: const Text('Change Profile Picture'))
+                        child: const Text('Log Out'))
                   ],
                 ),
               ),

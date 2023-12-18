@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:college_saathi/data/repositories/authentication/authentication_repository.dart';
 import 'package:college_saathi/features/authentication/models/request_model.dart';
 import 'package:college_saathi/features/authentication/models/user_model.dart';
+import 'package:college_saathi/features/personalization/models/events_model.dart';
 import 'package:college_saathi/utils/exceptions/firebase_exceptions.dart';
 import 'package:college_saathi/utils/exceptions/format_exceptions.dart';
 import 'package:college_saathi/utils/exceptions/platform_exceptions.dart';
@@ -11,7 +12,25 @@ import 'package:get/get.dart';
 class UserRepository extends GetxController {
   static UserRepository get instance => Get.find();
   final FirebaseFirestore _db = FirebaseFirestore.instance;
+  Future<List<EventsModel>> fetchEvents() async {
+    try {
+      final querySnapshot = await _db.collection("Events").get();
 
+      final requests = querySnapshot.docs
+          .map((doc) => EventsModel.fromSnapshot(doc))
+          .toList();
+
+      return requests;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
   /// Function to save user data to Firestore.
   Future<void> saveUserRecord(UserModel user) async {
     try {

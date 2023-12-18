@@ -19,7 +19,7 @@ class ForgetPasswordController extends GetxController {
     try {
       //Start Loading
       TFullScreenLoader.openLoadingDialog(
-          'Processing your request...', TImages.appleLogo);
+          'Processing your request...', TImages.docerAnimation);
 // Check Internet Connectivity
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
@@ -57,7 +57,7 @@ class ForgetPasswordController extends GetxController {
    try {
       //Start Loading
       TFullScreenLoader.openLoadingDialog(
-          'Processing your request...', TImages.appleLogo);
+          'Processing your request...', TImages.docerAnimation);
 // Check Internet Connectivity
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {

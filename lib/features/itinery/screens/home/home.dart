@@ -1,6 +1,9 @@
+import 'package:college_saathi/features/authentication/screens/signup/events.dart';
 import 'package:college_saathi/features/personalization/controllers/home_controller.dart';
 import 'package:college_saathi/features/personalization/controllers/user_controller.dart';
+import 'package:college_saathi/features/personalization/screens/profile/important_contacts.dart';
 import 'package:college_saathi/features/personalization/screens/profile/section_heading.dart';
+import 'package:college_saathi/features/personalization/screens/profile/vendors.dart';
 import 'package:college_saathi/utils/constants/sizes.dart';
 import 'package:college_saathi/utils/constants/text_strings.dart';
 import 'package:college_saathi/utils/validators/validation.dart';
@@ -135,7 +138,7 @@ class HomePage extends StatelessWidget {
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            onPressed: () => controller.makeRequest(),
+                            onPressed: ()=> Get.to(()=> ImportantContacts()),
                             child: const Text('Important Contacts'),
                           ),
                         ),
@@ -143,7 +146,7 @@ class HomePage extends StatelessWidget {
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            onPressed: () => controller.makeRequest(),
+                            onPressed: ()=> Get.to(()=> Vendors()),
                             child: const Text('Vendor Details'),
                           ),
                         ),

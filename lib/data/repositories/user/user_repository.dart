@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:college_saathi/data/repositories/authentication/authentication_repository.dart';
 import 'package:college_saathi/features/authentication/models/request_model.dart';
 import 'package:college_saathi/features/authentication/models/user_model.dart';
+import 'package:college_saathi/features/personalization/models/contacts_model.dart';
 import 'package:college_saathi/features/personalization/models/events_model.dart';
+import 'package:college_saathi/features/personalization/models/vendors_model.dart';
 import 'package:college_saathi/utils/exceptions/firebase_exceptions.dart';
 import 'package:college_saathi/utils/exceptions/format_exceptions.dart';
 import 'package:college_saathi/utils/exceptions/platform_exceptions.dart';
@@ -31,10 +33,48 @@ class UserRepository extends GetxController {
       throw 'Something went wrong. Please try again';
     }
   }
+  Future<List<VendorsModel>> fetchVendors() async {
+    try {
+      final querySnapshot = await _db.collection("Vendors").get();
+
+      final requests = querySnapshot.docs
+          .map((doc) => VendorsModel.fromSnapshot(doc))
+          .toList();
+
+      return requests;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
   /// Function to save user data to Firestore.
   Future<void> saveUserRecord(UserModel user) async {
     try {
       await _db.collection("Users").doc(user.id).set(user.toJson());
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
+  Future<List<ContactsModel>> fetchContacts() async {
+    try {
+      final querySnapshot = await _db.collection("Contacts").get();
+
+      final requests = querySnapshot.docs
+          .map((doc) => ContactsModel.fromSnapshot(doc))
+          .toList();
+
+      return requests;
     } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
     } on FormatException catch (_) {

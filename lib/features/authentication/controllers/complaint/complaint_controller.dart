@@ -38,7 +38,7 @@ class ComplaintController extends GetxController{
           title: 'Congratulations', message: 'Your complaint has been taken care of. ');
 
 // Move to previous screen.
-      Get.off(() => const ridehistory());
+      // Get.off(() => const ridehistory());
     }catch (e) {
       TFullScreenLoader.stopLoading();
       TLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());

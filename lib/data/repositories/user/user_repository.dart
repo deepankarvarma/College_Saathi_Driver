@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:college_saathi/data/repositories/authentication/authentication_repository.dart';
+import 'package:college_saathi/features/authentication/models/history_model.dart';
 import 'package:college_saathi/features/authentication/models/request_model.dart';
 import 'package:college_saathi/features/authentication/models/user_model.dart';
 import 'package:college_saathi/features/personalization/models/contacts_model.dart';
@@ -8,6 +9,7 @@ import 'package:college_saathi/features/personalization/models/vendors_model.dar
 import 'package:college_saathi/utils/exceptions/firebase_exceptions.dart';
 import 'package:college_saathi/utils/exceptions/format_exceptions.dart';
 import 'package:college_saathi/utils/exceptions/platform_exceptions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
@@ -52,6 +54,36 @@ class UserRepository extends GetxController {
       throw 'Something went wrong. Please try again';
     }
   }
+  Future<List<HistoryModel>> fetchHistory() async {
+  try {
+    // Get the current user ID
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      throw 'User not authenticated';
+    }
+
+    // Use the current user ID to fetch history
+    final querySnapshot = await FirebaseFirestore.instance
+        .collection('History')
+        .doc(user.uid) // Using the current user's ID
+        .collection('CompletedRequests')
+        .get();
+
+    final history = querySnapshot.docs
+        .map((doc) => HistoryModel.fromSnapshot(doc))
+        .toList();
+
+    return history;
+  } on FirebaseException catch (e) {
+    throw TFirebaseException(e.code).message;
+  } on FormatException catch (_) {
+    throw const TFormatException();
+  } on PlatformException catch (e) {
+    throw TPlatformException(e.code).message;
+  } catch (e) {
+    throw 'Something went wrong. Please try again';
+  }
+}
   /// Function to save user data to Firestore.
   Future<void> saveUserRecord(UserModel user) async {
     try {

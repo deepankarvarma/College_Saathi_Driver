@@ -44,7 +44,7 @@ class NavigationController extends GetxController {
   final screens = [
     
     const HomePage(),
-    const ridehistory(),
+     rideHistory(),
     EventsPage(),
     const ProfileScreen(),
   ];

@@ -85,7 +85,18 @@ class UserDetails extends StatelessWidget {
               const SizedBox(
                 height: TSizes.spaceBtwSections,
               ),
-              
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        Colors.green,
+                    side: const BorderSide(color: Colors.green), // Set the background color to green
+                  ),
+                  child: const Text('Make Payment'),
+                ),
+              ),
             ],
           ),
         ),

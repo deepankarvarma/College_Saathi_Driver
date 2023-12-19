@@ -93,7 +93,7 @@ class HomeController extends GetxController {
     );
 
     // Move to UserDetails screen
-    Get.to(() => UserDetails(request: newUser));
+    Get.offAll(() => UserDetails(request: newUser));
   } catch (e) {
     // Remove Loader
     TFullScreenLoader.stopLoading();
